@@ -1,6 +1,5 @@
 package dj.aurelia.aureliaclient;
 
-import dj.aurelia.aureliaclient.filters.AddRequestHeaderFilter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.SpringApplication;
@@ -10,6 +9,7 @@ import org.springframework.cloud.client.loadbalancer.LoadBalanced;
 import org.springframework.cloud.netflix.zuul.EnableZuulProxy;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.client.RestTemplate;
 import springfox.documentation.builders.PathSelectors;
 import springfox.documentation.builders.RequestHandlerSelectors;
@@ -22,18 +22,29 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 @EnableZuulProxy
 @Configuration
 @EnableSwagger2
+@CrossOrigin("*")
 public class AureliaClientApplication {
 
+//    @Autowired
+//    private static AuthorityRepository authorityRepository;
 
     public static Logger logger = LoggerFactory.getLogger(AureliaClientApplication.class);
     public static void main(String[] args) {
         SpringApplication.run(AureliaClientApplication.class, args);
+
+//        Authority admin = new Authority();
+//        admin.setName(AuthorityName.ROLE_ADMIN);
+//        authorityRepository.save(admin);
+//        Authority user = new Authority();
+//        user.setName(AuthorityName.ROLE_USER);
+//        authorityRepository.save(user);
+
     }
 
-    @Bean
-    public AddRequestHeaderFilter addRequestHeaderFilter(){
-        return new AddRequestHeaderFilter();
-    }
+//    @Bean
+//    public AddRequestHeaderFilter addRequestHeaderFilter(){
+//        return new AddRequestHeaderFilter();
+//    }
 
     @Bean
     @LoadBalanced

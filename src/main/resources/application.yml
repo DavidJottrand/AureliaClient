@@ -1,6 +1,13 @@
 spring:
   application:
     name: AureliaClient
+  datasource:
+    url: jdbc:mysql://localhost:3306/aurelia_security_db
+    username: root
+    password: '{cipher}8f6232cd9c33135aec4a0436fda3ac97c7af8abbab5919b3af8c5cfa66f4d2cb'
+  jpa:
+    hibernate:
+      ddl-auto: update
 server:
   port: 3001
   error:
@@ -13,13 +20,19 @@ eureka:
     fetchRegistry: true
   instance:
     leaseRenewalIntervalInSeconds: 5
-#security:
-#  oauth2:
-#    client:
-#      client-id: 0oa11ssdbXrCHGG2X4x6
-#      client-secret: {cipher}bcc607e7b3eb03cdc856c9654b9d3c4326a06ad4609ab2760aa9f587b753c1bf30c6d84660671a1495041cfc2bfdb19bcbe534bb69d8b1da557753dc2c807da3
-#      access-token-uri: https://dev-258781.okta.com/oauth2/default/v1/token
-#      user-authorization-uri: https://dev-258781.okta.com/oauth2/default/v1/authorize
-#      scope: openid profile email
-#      user-info-uri: https://dev-258781.okta.com/oauth2/default/v1/userinfo
+#zuul:
+#  routes:
+#    AureliaSecurity:
+#      path: /auth/**
+#      id: AureliaSecurity
+#      strip-prefix: false
+#      sensitive-headers: Cookie, Set-Cookie
 
+jwt:
+  header: Authorization
+  secret: mySecret
+  expiration: 604800
+  route:
+    authentication:
+      path: /auth
+      refresh: /refresh

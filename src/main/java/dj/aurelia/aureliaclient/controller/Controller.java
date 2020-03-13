@@ -1,12 +1,14 @@
 package dj.aurelia.aureliaclient.controller;
 
 import dj.aurelia.aureliaclient.domain.UserDto;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.client.RestTemplate;
 
 @RestController
+@CrossOrigin(value = "*")
 public class Controller {
 
     RestTemplate restTemplate;
